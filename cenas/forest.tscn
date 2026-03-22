@@ -1,0 +1,94 @@
+[gd_scene format=4 uid="uid://daiudhxckp0pk"]
+
+[ext_resource type="PackedScene" uid="uid://bitvcths0qfc4" path="res://entities/player.tscn" id="1_v3mdc"]
+[ext_resource type="TileSet" uid="uid://cu018xaqkyaex" path="res://tiles/terrain.tres" id="2_xxtad"]
+[ext_resource type="Texture2D" uid="uid://c8ijdphn47kbi" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/6 - Distant_trees.png" id="3_pyllb"]
+[ext_resource type="Texture2D" uid="uid://bubxjo2fh32ne" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/5 - Tree_row_BG_2.png" id="4_g8n0t"]
+[ext_resource type="Texture2D" uid="uid://6wrcspo57jy3" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/4 - Tree_row_BG_1.png" id="5_eagp0"]
+[ext_resource type="Texture2D" uid="uid://hw3cgyjnvmhc" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/3 - Bottom_leaf_piles.png" id="6_f7cnu"]
+[ext_resource type="Texture2D" uid="uid://0bq3mkml1edi" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/2 - Trees.png" id="7_1vuwj"]
+[ext_resource type="Texture2D" uid="uid://c14w26orxuk3l" path="res://sprites/Seasonal Tilesets/2 - Autumn Forest/Background parts/1 - Leaf_top.png" id="8_8c8og"]
+
+[node name="Forest" type="Node2D" unique_id=776164789]
+
+[node name="Player" parent="." unique_id=1259058155 instance=ExtResource("1_v3mdc")]
+position = Vector2(22, 174)
+
+[node name="Terrain" type="TileMapLayer" parent="." unique_id=166518371]
+top_level = true
+tile_map_data = PackedByteArray("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")
+tile_set = ExtResource("2_xxtad")
+
+[node name="ParalaxBackground" type="Node2D" parent="." unique_id=78030221]
+
+[node name="6" type="Parallax2D" parent="ParalaxBackground" unique_id=1965962251]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParalaxBackground/6" unique_id=7784673]
+texture_repeat = 2
+position = Vector2(1, 1)
+texture = ExtResource("3_pyllb")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="5" type="Parallax2D" parent="ParalaxBackground" unique_id=1556644252]
+scroll_scale = Vector2(0.2, 0.2)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParalaxBackground/5" unique_id=1391440650]
+texture_repeat = 2
+position = Vector2(1, 1)
+texture = ExtResource("4_g8n0t")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="4" type="Parallax2D" parent="ParalaxBackground" unique_id=675001601]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParalaxBackground/4" unique_id=29997838]
+texture_repeat = 2
+position = Vector2(1, 1)
+texture = ExtResource("5_eagp0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="3" type="Parallax2D" parent="ParalaxBackground" unique_id=503120760]
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParalaxBackground/3" unique_id=2032478554]
+texture_repeat = 2
+position = Vector2(1, 1)
+texture = ExtResource("6_f7cnu")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="2" type="Parallax2D" parent="ParalaxBackground" unique_id=1301448759]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParalaxBackground/2" unique_id=1275481340]
+texture_repeat = 2
+position = Vector2(1, 1)
+texture = ExtResource("7_1vuwj")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
+
+[node name="1" type="Parallax2D" parent="ParalaxBackground" unique_id=118515490]
+scroll_scale = Vector2(0.8, 0.8)
+repeat_size = Vector2(288, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParalaxBackground/1" unique_id=1480983859]
+texture_repeat = 2
+position = Vector2(1, 1)
+texture = ExtResource("8_8c8og")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 576, 208)
