@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://bitvcths0qfc4"]
 
 [ext_resource type="Script" uid="uid://cytgfm625jeyy" path="res://scripts/player.gd" id="1_merdl"]
+[ext_resource type="Texture2D" uid="uid://bqwtdvhna17jq" path="res://sprites/Characters/1 - Penguin/Ducking (16 x 16).png" id="2_6nm46"]
 [ext_resource type="Texture2D" uid="uid://bj0ubcr4mfgwg" path="res://sprites/Characters/1 - Penguin/Idle (16 x 16).png" id="2_b0kkn"]
 [ext_resource type="Texture2D" uid="uid://j17noboa2gli" path="res://sprites/Characters/1 - Penguin/Falling (16 x 16).png" id="2_qly61"]
 [ext_resource type="Texture2D" uid="uid://dslmgoaos14yf" path="res://sprites/Characters/1 - Penguin/Waddling (16 x 16).png" id="3_e4p34"]
+[ext_resource type="Texture2D" uid="uid://cv1ofpv8sx0k0" path="res://sprites/Characters/1 - Penguin/Blink (16 x 16).png" id="4_6nm46"]
 [ext_resource type="Texture2D" uid="uid://crxamncd17u1q" path="res://sprites/Characters/1 - Penguin/Jump (16 x 16).png" id="4_qsoyl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qly61"]
-size = Vector2(16, 16)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6nm46"]
+radius = 6.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0i8f"]
 atlas = ExtResource("2_qly61")
@@ -32,6 +35,10 @@ region = Rect2(48, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_6nm46"]
 atlas = ExtResource("2_b0kkn")
 region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oprnr"]
+atlas = ExtResource("4_6nm46")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0i614"]
 atlas = ExtResource("4_qsoyl")
@@ -65,10 +72,18 @@ region = Rect2(80, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_6nm46")
+}],
+"loop": false,
+"name": &"duck",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_q0i8f")
 }],
-"loop": true,
-"name": &"falling",
+"loop": false,
+"name": &"fall",
 "speed": 5.0
 }, {
 "frames": [{
@@ -86,16 +101,19 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6nm46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oprnr")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0i614")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump",
 "speed": 5.0
 }, {
@@ -120,22 +138,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 10.0
+"speed": 8.0
 }]
 
-[node name="Player" type="CharacterBody2D" unique_id=1259058155]
+[node name="Player" type="CharacterBody2D" unique_id=1259058155 groups=["Player"]]
+z_index = 1
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_merdl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=416647039]
-shape = SubResource("RectangleShape2D_qly61")
+visible = false
+shape = SubResource("CapsuleShape2D_6nm46")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=82106886]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_i623q")
 animation = &"idle"
-autoplay = "idle"
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=958118039]
-limit_left = 0
-limit_bottom = 208
-position_smoothing_enabled = true
