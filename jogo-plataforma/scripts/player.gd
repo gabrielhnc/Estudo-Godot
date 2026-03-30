@@ -3,6 +3,7 @@ extends CharacterBody2D
 # REFERENCIAS DOS NÓS
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var hitbox_collision_shape: CollisionShape2D = $HitBox/CollisionShape2D
 @onready var reload_timer: Timer = $ReloadTimer
 
 # DIREÇÃO INICIAL
@@ -15,7 +16,7 @@ var direction = 0
 
 # SLIDE
 @export var slide_deceleration = 200
-@export var slide_multiplicator = 1.8
+@export var slide_multiplicator = 5
 
 # JUMP
 @export var max_jump_count = 2
@@ -110,7 +111,7 @@ func exit_from_slide_state():
 func go_to_dead_state():
 	status = PlayerState.dead
 	anim.play("dead")
-	velocity = Vector2.ZERO
+	velocity.x = 0
 	reload_timer.start()
 
 # ================================================================
@@ -233,11 +234,17 @@ func set_small_collider():
 	collision_shape.shape.height = 10
 	collision_shape.position.y = 3
 	
+	hitbox_collision_shape.shape.size.y = 12
+	hitbox_collision_shape.position.y = 2
+	
 # COLISOR ORIGINAL (IDLE / WALK / ...)
 func set_large_collider():
 	collision_shape.shape.radius = 6
 	collision_shape.shape.height = 16
 	collision_shape.position.y = 0
+	
+	hitbox_collision_shape.shape.size.y = 16
+	hitbox_collision_shape.position.y = 0
 	
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemies"):

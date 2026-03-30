@@ -163,9 +163,7 @@ script = ExtResource("1_fpmxe")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=264320397]
 sprite_frames = SubResource("SpriteFrames_0sdy1")
-animation = &"attack"
-frame = 4
-frame_progress = 1.0
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1332478324]
 visible = false
@@ -197,6 +195,6 @@ target_position = Vector2(49, 0)
 collision_mask = 2
 
 [node name="BoneStartPosition" type="Node2D" parent="." unique_id=1031780697]
-position = Vector2(13, 0)
+position = Vector2(14, -4)
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
