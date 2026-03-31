@@ -16,7 +16,7 @@ var direction = 0
 
 # SLIDE
 @export var slide_deceleration = 200
-@export var slide_multiplicator = 5
+@export var slide_multiplicator = 1.8
 
 # JUMP
 @export var max_jump_count = 2
@@ -31,7 +31,8 @@ enum PlayerState {
 	fall,
 	duck,
 	slide,
-	dead
+	dead,
+	dance
 }
 
 var status: PlayerState
@@ -60,6 +61,8 @@ func _physics_process(delta: float) -> void:
 			slide_state(delta)
 		PlayerState.dead:
 			dead_state(delta)
+		PlayerState.dance:
+			dance_state(delta)
 			
 	move_and_slide()
 
@@ -113,6 +116,10 @@ func go_to_dead_state():
 	anim.play("dead")
 	velocity.x = 0
 	reload_timer.start()
+	
+func go_to_dance_state():
+	status = PlayerState.dance
+	anim.play("dance")
 
 # ================================================================
 # ESTADOS DO PLAYER (MODIFICAÇÃO CONFORME AS AÇÕES NO JOGO)
@@ -120,48 +127,33 @@ func go_to_dead_state():
 # IDLE STATE
 func idle_state(delta):
 	move(delta)
-	
-	if velocity.x != 0:
-		go_to_walk_state()
-		return
+	walking()
+	jumping()
+	ducking()
+	dancing()
 		
-	if Input.is_action_just_pressed("jump"):
-		go_to_jump_state()
-		return
-		
-	if Input.is_action_pressed("duck"):
-		go_to_duck_state()
-		return
-
 # WALK STATE
 func walk_state(delta):
 	move(delta)
-	
-	if Input.is_action_just_pressed("jump"):
-		go_to_jump_state()
-		return
+	dancing()
+	jumping()
+	stopping()
+	sliding()
 	
 	if not is_on_floor():
 		jump_count += 1
 		go_to_fall_state()
 		return
 	
-	if velocity.x == 0:
-		go_to_idle_state()
-		return
-		
-	if Input.is_action_just_pressed("slide"):
-		go_to_slide_state()
-		return
-	
 # JUMP STATE
 func jump_state(delta):
 	move(delta)
+	dancing()
 	
 	if Input.is_action_just_pressed("jump") and can_jump():
 		go_to_jump_state()
 		return
-
+		
 	if velocity.y > 0:
 		go_to_fall_state()
 		return
@@ -169,6 +161,7 @@ func jump_state(delta):
 # FALL STATE
 func fall_state(delta):
 	move(delta)
+	dancing()
 	
 	if Input.is_action_just_pressed("jump") and can_jump():
 		go_to_jump_state()
@@ -202,6 +195,38 @@ func slide_state(delta):
 		
 func dead_state(_delta):
 	pass
+	
+func dance_state(delta):
+	move(delta)
+	jumping()
+	
+	if anim.frame == 13:
+		go_to_idle_state()
+		return
+	
+# ================================================================
+# TRATATIVA DE COLISÃO COM O INIMIGO OU PROJETEIS
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemies"):
+		hit_enemy(area)
+	elif area.is_in_group("LethalArea"):
+		hit_lethal_area()
+
+func hit_enemy(area: Area2D):
+	if status == PlayerState.slide:
+		area.get_parent().take_damage()
+		return	
+
+	if velocity.y > 0:
+		area.get_parent().take_damage()
+		go_to_jump_state()
+	else:
+		if status != PlayerState.dead:
+			go_to_dead_state()
+	
+func hit_lethal_area():
+	go_to_dead_state()
 
 # ================================================================
 # FUNÇÕES AUXILIARES
@@ -245,30 +270,39 @@ func set_large_collider():
 	
 	hitbox_collision_shape.shape.size.y = 16
 	hitbox_collision_shape.position.y = 0
-	
-func _on_hit_box_area_entered(area: Area2D) -> void:
-	if area.is_in_group("Enemies"):
-		hit_enemy(area)
-	elif area.is_in_group("LethalArea"):
-		hit_lethal_area()
-
-func hit_enemy(area: Area2D):
-	if status == PlayerState.slide:
-		area.get_parent().take_damage()
-		return	
-
-	if velocity.y > 0:
-		area.get_parent().take_damage()
-		go_to_jump_state()
-	else:
-		if status != PlayerState.dead:
-			go_to_dead_state()
-	
-func hit_lethal_area():
-	go_to_dead_state()
 
 func get_slide_speed():
 	return max_speed * slide_multiplicator
 
 func _on_reload_timer_timeout() -> void:
 	get_tree().reload_current_scene()
+	
+func dancing():
+	if Input.is_action_just_pressed("dance"):
+		go_to_dance_state()
+		return
+		
+func walking():
+	if velocity.x != 0:
+		go_to_walk_state()
+		return
+	
+func jumping():
+	if Input.is_action_just_pressed("jump"):
+		go_to_jump_state()
+		return
+		
+func ducking():
+	if Input.is_action_just_pressed("duck"):
+		go_to_duck_state()
+		return
+	
+func stopping():
+	if velocity.x == 0:
+		go_to_idle_state()
+		return
+		
+func sliding():
+	if Input.is_action_just_pressed("slide"):
+		go_to_slide_state()
+		return

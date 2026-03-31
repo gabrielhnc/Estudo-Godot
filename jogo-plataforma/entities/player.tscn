@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bj0ubcr4mfgwg" path="res://sprites/Characters/1 - Penguin/Idle (16 x 16).png" id="2_b0kkn"]
 [ext_resource type="Texture2D" uid="uid://j17noboa2gli" path="res://sprites/Characters/1 - Penguin/Falling (16 x 16).png" id="2_qly61"]
 [ext_resource type="Texture2D" uid="uid://hn7ufunlc627" path="res://sprites/Characters/1 - Penguin/Hurt (16 x 16).png" id="2_tjdhl"]
+[ext_resource type="Texture2D" uid="uid://bvqf1pgrsa0y0" path="res://sprites/Characters/1 - Penguin/Victory_Dance (16 x 16).png" id="2_x08pd"]
 [ext_resource type="Texture2D" uid="uid://dslmgoaos14yf" path="res://sprites/Characters/1 - Penguin/Waddling (16 x 16).png" id="3_e4p34"]
 [ext_resource type="Texture2D" uid="uid://y7p4llrfv2pn" path="res://sprites/Characters/1 - Penguin/Lying_On_Ground (16 x 16).png" id="3_x08pd"]
 [ext_resource type="Texture2D" uid="uid://cv1ofpv8sx0k0" path="res://sprites/Characters/1 - Penguin/Blink (16 x 16).png" id="4_6nm46"]
@@ -14,6 +15,26 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6nm46"]
 radius = 6.0
 height = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n8aq"]
+atlas = ExtResource("2_x08pd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28s6d"]
+atlas = ExtResource("2_x08pd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cicqb"]
+atlas = ExtResource("2_x08pd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hj0ki"]
+atlas = ExtResource("2_x08pd")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fruft"]
+atlas = ExtResource("2_x08pd")
+region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0i8f"]
 atlas = ExtResource("2_qly61")
@@ -85,6 +106,53 @@ region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i623q"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n8aq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28s6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hj0ki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fruft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fruft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fruft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fruft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fruft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cicqb")
+}],
+"loop": false,
+"name": &"dance",
+"speed": 13.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_tjdhl")
@@ -210,7 +278,7 @@ shape = SubResource("RectangleShape2D_tjdhl")
 debug_color = Color(0.9954377, 0.046950296, 0.10810069, 0.41960785)
 
 [node name="ReloadTimer" type="Timer" parent="." unique_id=298637102]
-wait_time = 0.75
+wait_time = 0.8
 one_shot = true
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
