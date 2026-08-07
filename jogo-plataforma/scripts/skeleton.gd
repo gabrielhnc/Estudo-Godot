@@ -9,7 +9,7 @@ extends CharacterBody2D
 
 const SPINNING_BONE = preload("uid://dikbc1s6askqa")
 
-const SPEED = 20
+const SPEED = 25
 const JUMP_VELOCITY = -400
 var direction = 1
 var can_throw = true

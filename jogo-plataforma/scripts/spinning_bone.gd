@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 
-var speed = 60
+var speed = 75
 var direction = 1
 
 func _process(delta: float) -> void:

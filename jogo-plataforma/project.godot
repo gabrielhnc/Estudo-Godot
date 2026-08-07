@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Jogo-Plataforma-Estudo"
-run/main_scene="uid://daiudhxckp0pk"
+run/main_scene="uid://xjbpye5aqcae"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
